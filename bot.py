@@ -24,7 +24,6 @@ async def generate_image(message: types.Message):
     except Exception as e:
         await message.answer(f"Ошибка при генерации: {e}")
 
-# Веб-сервер для обмана Render
 async def handle(request):
     return web.Response(text="Bot is alive!")
 
