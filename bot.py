@@ -5,7 +5,7 @@ from aiohttp import web
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
 
-TELEGRAM_TOKEN = "8820153046:AAFcnSf1m6s..."  # Вставьте ваш полный токен бота
+TELEGRAM_TOKEN = "8820153046:AAFcnSf1m6s..."  # Замените на твой полный токен
 
 bot = Bot(token=TELEGRAM_TOKEN)
 dp = Dispatcher()
@@ -37,9 +37,15 @@ async def start_website():
     await site.start()
 
 async def main():
+    # Запускаем сайт и бота в одном цикле событий
     await start_website()
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
-    asyncio.run(main())
-    
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    try:
+        loop.run_until_complete(main())
+    except KeyboardInterrupt:
+        pass
+        
